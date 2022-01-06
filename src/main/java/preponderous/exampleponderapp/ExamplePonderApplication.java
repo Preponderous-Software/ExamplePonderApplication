@@ -1,5 +1,6 @@
 package preponderous.exampleponderapp;
 
+import preponderous.exampleponderapp.commands.HelpCommand;
 import preponderous.exampleponderapp.commands.InfoCommand;
 import preponderous.exampleponderapp.misc.CommandSender;
 import preponderous.exampleponderapp.utils.Logger;
@@ -93,6 +94,7 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
 
     private void initializeCommandService() {
         HashSet<AbstractCommand> commands = new HashSet<>();
+        commands.add(new HelpCommand());
         commands.add(new InfoCommand());
         commandService = new CommandService(commands);
     }
