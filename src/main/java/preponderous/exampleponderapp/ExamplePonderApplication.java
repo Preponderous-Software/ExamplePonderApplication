@@ -1,6 +1,6 @@
 package preponderous.exampleponderapp;
 
-import preponderous.exampleponderapp.commands.DefaultCommand;
+import preponderous.exampleponderapp.commands.InfoCommand;
 import preponderous.exampleponderapp.misc.CommandSender;
 import preponderous.exampleponderapp.utils.Logger;
 import preponderous.ponder.system.abs.AbstractCommand;
@@ -29,6 +29,7 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
         Logger.getInstance().log("Running application.");
         boolean running = true;
         CommandSender sender = new CommandSender();
+        sender.sendMessage("Welcome to an example ponder application. Type help to see a list of useful commands.");
         Scanner scanner = new Scanner(System.in);
         while (running) {
             if (!scanner.hasNext()) {
@@ -79,10 +80,6 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
     @Override
     public boolean onCommand(AbstractCommandSender sender, String label, String[] args) {
         Logger.getInstance().log("Interpreting command " + label);
-        if (args.length == 0) {
-            DefaultCommand defaultCommand = new DefaultCommand();
-            return defaultCommand.execute(sender);
-        }
         return commandService.interpretCommand(sender, label, args);
     }
 
@@ -95,14 +92,9 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
     }
 
     private void initializeCommandService() {
-        HashSet<String> coreCommands = new HashSet<>();
-        coreCommands.add("epa");
-        coreCommands.add("exampleponderapplication");
-        commandService = new CommandService(coreCommands);
-
         HashSet<AbstractCommand> commands = new HashSet<>();
-        commands.add(new DefaultCommand());
-        commandService.initialize(commands);
+        commands.add(new InfoCommand());
+        commandService = new CommandService(commands);
     }
 
     public static void main(String[] args) {

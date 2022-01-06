@@ -6,15 +6,16 @@ import preponderous.ponder.system.abs.AbstractCommandSender;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DefaultCommand extends AbstractCommand {
-    public DefaultCommand() {
-        super(new ArrayList<>(Arrays.asList("default")), new ArrayList<>(Arrays.asList("epa.default")));
+public class InfoCommand extends AbstractCommand {
+    public InfoCommand() {
+        super(new ArrayList<>(Arrays.asList("info")), new ArrayList<>(Arrays.asList("epa.info")));
     }
 
     @Override
     public boolean execute(AbstractCommandSender abstractCommandSender) {
         abstractCommandSender.sendMessage("Example Ponder Application");
         abstractCommandSender.sendMessage("Developer: Daniel Stephenson");
+        abstractCommandSender.sendMessage("Developed with: Ponder");
         return true;
     }
 
