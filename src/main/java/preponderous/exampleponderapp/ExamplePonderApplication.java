@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class ExamplePonderApplication extends AbstractPonderApplication {
     private static ExamplePonderApplication instance;
-    private boolean debug = true;
+    private boolean debug = false;
     private CommandService commandService;
 
     public static ExamplePonderApplication getInstance() {
