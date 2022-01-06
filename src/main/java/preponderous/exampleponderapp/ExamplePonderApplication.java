@@ -15,9 +15,12 @@ import java.util.Scanner;
 
 public class ExamplePonderApplication extends AbstractPonderApplication {
     private static ExamplePonderApplication instance;
+
     private boolean debug = false;
-    private CommandService commandService;
     private boolean running = true;
+
+    private CommandService commandService;
+    private final Scanner scanner = new Scanner(System.in);
 
     public static ExamplePonderApplication getInstance() {
         return instance;
@@ -28,19 +31,20 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
         onStartup();
     }
 
-    public boolean run() {
+    public boolean run(AbstractCommandSender sender) {
         Logger.getInstance().log("Running application.");
-        CommandSender sender = new CommandSender();
+
+        // declare variables to be used in loop
+        String line;
+        String label;
+        String[] args;
+
         sender.sendMessage("Welcome to an example ponder application. Type help to see a list of useful commands.");
-        Scanner scanner = new Scanner(System.in);
         while (isRunning()) {
-            // get input
-            if (!scanner.hasNext()) {
+            line = getInput();
+            if (line == null) {
                 return false;
             }
-            String line = scanner.nextLine();
-            String label;
-            String[] args;
 
             // handle spaces
             int indexOfFirstSpace = line.indexOf(' ');
@@ -55,12 +59,21 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
                 args = new String[0];
             }
 
+            // handle command
             boolean success = onCommand(sender, label, args);
             if (!success) {
                 sender.sendMessage("Something went wrong processing your command.");
             }
         }
         return true;
+    }
+
+    private String getInput() {
+        // get input
+        if (!scanner.hasNext()) {
+            return null;
+        }
+        return scanner.nextLine();
     }
 
     @Override
@@ -107,6 +120,7 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
 
     public static void main(String[] args) {
         ExamplePonderApplication application = new ExamplePonderApplication();
-        application.run();
+        CommandSender sender = new CommandSender();
+        application.run(sender);
     }
 }
