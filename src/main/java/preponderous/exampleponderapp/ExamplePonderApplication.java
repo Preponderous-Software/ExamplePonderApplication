@@ -17,6 +17,7 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
     private static ExamplePonderApplication instance;
     private boolean debug = false;
     private CommandService commandService;
+    private boolean running = true;
 
     public static ExamplePonderApplication getInstance() {
         return instance;
@@ -29,35 +30,30 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
 
     public boolean run() {
         Logger.getInstance().log("Running application.");
-        boolean running = true;
         CommandSender sender = new CommandSender();
         sender.sendMessage("Welcome to an example ponder application. Type help to see a list of useful commands.");
         Scanner scanner = new Scanner(System.in);
-        while (running) {
+        while (isRunning()) {
+            // get input
             if (!scanner.hasNext()) {
                 return false;
             }
             String line = scanner.nextLine();
+            String label;
+            String[] args;
 
+            // handle spaces
             int indexOfFirstSpace = line.indexOf(' ');
-
-            if (indexOfFirstSpace == -1) {
-                boolean success = onCommand(sender, line, new String[0]);
-                if (!success) {
-                    sender.sendMessage("Something went wrong processing your command.");
-                }
-                continue;
+            if (indexOfFirstSpace != -1) {
+                // spaces found
+                label = line.substring(0, indexOfFirstSpace);
+                args = line.substring(indexOfFirstSpace).split(" ");
             }
-
-            String label = line.substring(0,indexOfFirstSpace );
-
-            if (label.equalsIgnoreCase("quit")) {
-                sender.sendMessage("Shutting down.");
-                running = false;
+            else {
+                // no spaces found
+                label = line;
+                args = new String[0];
             }
-
-            line = line.substring(indexOfFirstSpace);
-            String[] args = line.split(" ");
 
             boolean success = onCommand(sender, label, args);
             if (!success) {
@@ -91,6 +87,14 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
 
     public void setDebugEnabled(boolean debug) {
         this.debug = debug;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
     }
 
     private void initializeCommandService() {
