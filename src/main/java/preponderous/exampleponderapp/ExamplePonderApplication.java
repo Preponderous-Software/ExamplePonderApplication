@@ -62,7 +62,7 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
             // handle command
             boolean success = onCommand(sender, label, args);
             if (!success) {
-                sender.sendMessage("Something went wrong processing your command.");
+                Logger.getInstance().log("Something went wrong processing the " + label + " command.");
             }
         }
         return true;
