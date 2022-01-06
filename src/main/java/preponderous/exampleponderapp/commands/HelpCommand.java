@@ -17,6 +17,7 @@ public class HelpCommand extends AbstractCommand {
         sender.sendMessage("=== Example Ponder Application Commands ===");
         sender.sendMessage("help - View a list of useful commands.");
         sender.sendMessage("info - View information about the application.");
+        sender.sendMessage("quit - Quit the application.");
         return true;
     }
 
