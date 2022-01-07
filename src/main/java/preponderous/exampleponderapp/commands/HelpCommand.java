@@ -6,6 +6,9 @@ import preponderous.ponder.system.abs.AbstractCommandSender;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @author Daniel Stephenson
+ */
 public class HelpCommand extends AbstractCommand {
 
     public HelpCommand() {

@@ -6,6 +6,9 @@ import preponderous.ponder.system.abs.AbstractCommandSender;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @author Daniel Stephenson
+ */
 public class InfoCommand extends AbstractCommand {
     public InfoCommand() {
         super(new ArrayList<>(Arrays.asList("info")), new ArrayList<>(Arrays.asList("epa.info")));

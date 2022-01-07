@@ -6,6 +6,9 @@ import preponderous.ponder.system.abs.AbstractCommandSender;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * @author Daniel Stephenson
+ */
 public class QuitCommand extends AbstractCommand {
 
     public QuitCommand() {

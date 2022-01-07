@@ -13,6 +13,9 @@ import preponderous.ponder.system.services.CommandService;
 import java.util.HashSet;
 import java.util.Scanner;
 
+/**
+ * @author Daniel Stephenson
+ */
 public class ExamplePonderApplication extends AbstractPonderApplication {
     private static ExamplePonderApplication instance;
 
