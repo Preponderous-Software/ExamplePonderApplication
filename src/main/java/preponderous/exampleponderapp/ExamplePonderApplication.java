@@ -23,7 +23,7 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
     private final Scanner scanner = new Scanner(System.in);
 
     /**
-     * This can be utitlized to access the self-managed instance of the application.
+     * This can be utilized to access the self-managed instance of the application.
      * @return The self-managed instance of the application.
      */
     public static ExamplePonderApplication getInstance() {
