@@ -1,11 +1,11 @@
 package preponderous.exampleponderapp.misc;
 
-import preponderous.ponder.system.abs.AbstractCommandSender;
+import preponderous.ponder.system.abs.CommandSender;
 
 /**
  * @author Daniel Stephenson
  */
-public class CommandSender extends AbstractCommandSender {
+public class CommandSenderImpl extends CommandSender {
 
     /**
      * This can be used to send a message to the command sender, who in this case is the user of the console.

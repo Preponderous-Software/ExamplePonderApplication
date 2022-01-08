@@ -3,11 +3,11 @@ package preponderous.exampleponderapp;
 import preponderous.exampleponderapp.commands.HelpCommand;
 import preponderous.exampleponderapp.commands.InfoCommand;
 import preponderous.exampleponderapp.commands.QuitCommand;
-import preponderous.exampleponderapp.misc.CommandSender;
+import preponderous.exampleponderapp.misc.CommandSenderImpl;
 import preponderous.exampleponderapp.utils.Logger;
-import preponderous.ponder.system.abs.AbstractCommand;
-import preponderous.ponder.system.abs.AbstractCommandSender;
-import preponderous.ponder.system.abs.AbstractPonderApplication;
+import preponderous.ponder.system.abs.ApplicationCommand;
+import preponderous.ponder.system.abs.CommandSender;
+import preponderous.ponder.system.abs.PonderApplication;
 import preponderous.ponder.system.services.CommandService;
 
 import java.util.HashSet;
@@ -16,7 +16,7 @@ import java.util.Scanner;
 /**
  * @author Daniel Stephenson
  */
-public class ExamplePonderApplication extends AbstractPonderApplication {
+public class ExamplePonderApplication extends PonderApplication {
     private static ExamplePonderApplication instance;
 
     private boolean debug = false;
@@ -46,7 +46,7 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
      * @param user The user of the application.
      * @return Whether the program exited successfully.
      */
-    public boolean run(AbstractCommandSender user) {
+    public boolean run(CommandSender user) {
         Logger.getInstance().log("Running application.");
 
         // declare variables to be used in loop
@@ -121,7 +121,7 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
      * @return Whether the execution of command was successful.
      */
     @Override
-    public boolean onCommand(AbstractCommandSender sender, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, String label, String[] args) {
         Logger.getInstance().log("Interpreting command " + label);
         return getCommandService().interpretCommand(sender, label, args);
     }
@@ -162,7 +162,7 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
      * Initializes the command service with the application's commands.
      */
     private void initializeCommandService() {
-        HashSet<AbstractCommand> commands = new HashSet<>();
+        HashSet<ApplicationCommand> commands = new HashSet<>();
         commands.add(new HelpCommand());
         commands.add(new InfoCommand());
         commands.add(new QuitCommand());
@@ -199,7 +199,7 @@ public class ExamplePonderApplication extends AbstractPonderApplication {
      */
     public static void main(String[] args) {
         ExamplePonderApplication application = new ExamplePonderApplication();
-        CommandSender sender = new CommandSender();
+        CommandSenderImpl sender = new CommandSenderImpl();
         application.run(sender);
     }
 }
