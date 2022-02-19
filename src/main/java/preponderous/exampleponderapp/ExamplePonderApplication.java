@@ -123,7 +123,7 @@ public class ExamplePonderApplication extends PonderApplication {
     @Override
     public boolean onCommand(CommandSender sender, String label, String[] args) {
         Logger.getInstance().log("Interpreting command " + label);
-        return getCommandService().interpretCommand(sender, label, args);
+        return getCommandService().interpretAndExecuteCommand(sender, label, args);
     }
 
     /**
