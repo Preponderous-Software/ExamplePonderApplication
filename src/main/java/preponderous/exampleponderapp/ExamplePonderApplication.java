@@ -66,7 +66,7 @@ public class ExamplePonderApplication extends PonderApplication {
             if (indexOfFirstSpace != -1) {
                 // spaces found
                 label = line.substring(0, indexOfFirstSpace);
-                args = line.substring(indexOfFirstSpace).split(" ");
+                args = line.substring(indexOfFirstSpace + 1).split(" ");
             }
             else {
                 // no spaces found
